@@ -11,7 +11,7 @@ In this project...
 
 
 
-### Capturas de Pantalla
+### Imágenes
 
 | Estado Inicial | Agitación de Prueba |
 |:--------------:|:-------------------:|
