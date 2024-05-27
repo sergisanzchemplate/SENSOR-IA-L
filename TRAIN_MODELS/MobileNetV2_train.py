@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 import os
 
 # Cargar el dataset de imágenes
-data_dir = 'dataset_fruta'
+data_dir = 'dataset'
 batch_size = 32
 img_height = 224
 img_width = 224
@@ -34,7 +34,7 @@ model = Model(inputs=base_model.input, outputs=head_model)
 model.compile(loss='categorical_crossentropy', optimizer=Adam(learning_rate=1e-4), metrics=['accuracy'])
 
 # Entrenar el modelo
-history = model.fit(train_data, validation_data=val_data, epochs=5)
+history = model.fit(train_data, validation_data=val_data, epochs=15)
 
 # Graficar la precisión y la pérdida durante el entrenamiento
 plt.figure(figsize=(12, 4))
