@@ -2,7 +2,7 @@
 
 | Bachelor's Degree Final Project of Computer Science | Universidad Autónoma de Barcelona |
 |:-------------------:|:-------------------:|
-| ![Logo del Proyecto](images/logo_chemplate.jfif) | ![Logo del Proyecto2](images/logo-metadades.png) |
+| ![Logo del Proyecto](images/logo_chemplate.jfif) | ![Logo del Proyecto](images/logo-metadates.png) |
 
 
 
