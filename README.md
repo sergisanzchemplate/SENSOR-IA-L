@@ -1,34 +1,26 @@
 # SENSOR-IA-L
 
 ![Logo del Proyecto](images/logo_chemplate.jfif)
-Breve descripción de lo que hace el proyecto y para qué sirve.
-
-## Abstract
-
-
-# SENSOR-IA-L
-
-![Logo del Proyecto](images/logo_chemplate.jfif)
-Breve descripción de lo que hace el proyecto y para qué sirve.
+Bachelor's Degree Final Project of Computer Science
 
 ## Abstract
 
 
 
 
+| Estado Inicial | Agitación de Prueba |
+|:--------------:|:-------------------:|
+| ![Estado Inicial](images/estat_inicial.PNG) | ![Agitación de Prueba](images/agitacio_prova.PNG) |
 
+| Alta Espuma | Baja Espuma |
+|:-----------:|:-----------:|
+| ![Alta Espuma](images/alt_espuma.PNG) | ![Baja Espuma](images/baix_espuma.PNG) |
 
-#### Estado Inicial
-![Estado Inicial](images/estat_inicial.PNG)
+| Foto 1 | Foto 2 |
+|:------:|:------:|
+| ![Foto 1](images/IMG_3484.jpg) | ![Foto 2](images/IMG_3495.jpg) |
 
-#### Agitación de Prueba
-![Agitación de Prueba](images/agitacio_prova.PNG)
+| Web Linkeada |
+|:------------:|
+| ![Web Linkeada](images/web_linkeada.PNG) |
 
-#### Alta Espuma
-![Alta Espuma](images/alt_espuma.PNG)
-
-#### Baja Espuma
-![Baja Espuma](images/baix_espuma.PNG)
-
-#### Foto 1
-![Foto 1](images/IMG_3484.jpg)
