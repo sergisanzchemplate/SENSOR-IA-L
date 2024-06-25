@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="es"> <!-- Cambiado el idioma a español -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Videostreaming</title>
+    <link rel="stylesheet" type="text/css" href="static/css/style.css"> <!-- Enlazamos el archivo CSS externo -->
+</head>
+<body>
+    <div class="container">
+        <img src="static/css/logo_chemplate.png" alt="Logo" class="logo"> <!-- Logo -->
+        <h1>Video en Directo</h1> <!-- Título más descriptivo -->
+        <div class="video-container"> <!-- Contenedor para el video -->
+            <img src="{{ url_for('video_feed') }}">
+        </div>
+    </div>
+</body>
+</html>
