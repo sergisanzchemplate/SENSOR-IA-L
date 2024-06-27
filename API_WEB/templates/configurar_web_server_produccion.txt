@@ -1,0 +1,41 @@
+
+
+sudo apt-get update
+sudo apt-get install gunicorn3 nginx
+
+
+
+gunicorn3 api_fotos:app -b localhost:8000 --daemon
+
+
+sudo nano /etc/nginx/sites-available/mi_sitio
+
+
+server {
+    listen 80;
+    server_name 192.168.50.113;
+    access_log  /var/log/nginx/api_fotos.log;
+
+    location / {
+        proxy_pass http://127.0.0.1:8000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}
+
+
+sudo ln -s /etc/nginx/sites-available/mi_sitio /etc/nginx/sites-enabled/
+
+sudo service nginx restart && cd Desktop/API_FOTOS/ && gunicorn3 api_fotos:app -b localhost:8000 --daemon
+
+
+
+
+0 ALT_NIVELL_ESCUMA_CUBETA2
+1 AMB_TAPA_CUBETA2
+2 BAIX_NIVELL_ESCUMA_CUBETA2
+3 PECES_SUBMERGIDES_CUBETA2
+4 SENSE_TAPA_CUBETA2
+5 PECES_SUBMERGIDES+BOMBOGEIG_CUBETA2
+6 PECES_SUBMERGIDES+ESCUMA_CUBETA2
+7 BOMBOGEIG_CUBETA2
