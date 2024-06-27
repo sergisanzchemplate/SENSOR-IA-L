@@ -1,0 +1,32 @@
+INFORMACIO A TENIR EN COMPTE:
+
+GDE:
+-Per entrar a les webs o raspberrys de GDE es necesita estar conectat al seu wifi, 
+o alla o desde aqui a chemplate amb una VPN subministrada per ells amb la aplicacio de Fortinet.
+-contraseña d'aquest ordinador: 4cT1v41*$
+
+web raspberry general, ESCRIURE AL NAVEGADOR:
+raspberrys web de cada una: IP 192.168.50.129
+camara1 IP 192.168.50.113
+camara2 IP 192.168.50.114
+camara3 IP 192.168.50.115
+
+per entrar per MOBAXTREM:
+nom raspberry1: camera contraseña: Chemplate123
+nom raspberry2: proves contraseña: proves
+nom raspberry3: camera2 contraseña: Chemplate123
+
+
+per reiniciar web si cau:
+en terminal de cada raspberry: 
+1) cd Desktop/API_FOTOS/
+2) sudo service nginx restart
+3) gunicorn3 api_fotos:app -b localhost:8000 --daemon
+
+cd Desktop/API_FOTOS/ && sudo service nginx restart && gunicorn3 api_fotos:app -b localhost:8000 --daemon
+
+
+en raspberry anomenada gde: 
+1) cd Desktop/API_WEB/
+2) sudo service nginx restart
+3) gunicorn3 api_web:app -b localhost:8000 --daemon
