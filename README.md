@@ -1,5 +1,6 @@
 # SENSOR-IA-L
 
+
 | Bachelor's Degree Final Project of Computer Science | Universidad Autónoma de Barcelona |
 |:-------------------:|:-------------------:|
 | ![Logo del Proyecto](images/logo_chemplate.jfif) | <img src="images/logo-metadates.png" alt="Foto3" width="200"/>|
