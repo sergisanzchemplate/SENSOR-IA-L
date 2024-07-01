@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiple USB Cameras</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .video-container {
+            width: 30%;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        video {
+            width: 100%;
+            height: auto;
+        }
+
+        .label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 8px;
+            box-sizing: border-box;
+            font-size: 14px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <video id="video1" autoplay playsinline></video>
+        <div class="label">Camera 1</div>
+    </div>
+    <div class="video-container">
+        <video id="video2" autoplay playsinline></video>
+        <div class="label">Camera 2</div>
+    </div>
+    <div class="video-container">
+        <video id="video3" autoplay playsinline></video>
+        <div class="label">Camera 3</div>
+    </div>
+
+    <script>
+        async function startStream() {
+            try {
+                const devices = await navigator.mediaDevices.enumerateDevices();
+                const cameras = devices.filter(device => device.kind === 'videoinput');
+
+                if (cameras.length >= 3) {
+                    const constraints1 = {
+                        video: {
+                            deviceId: cameras[0].deviceId
+                        }
+                    };
+                    const constraints2 = {
+                        video: {
+                            deviceId: cameras[1].deviceId
+                        }
+                    };
+                    const constraints3 = {
+                        video: {
+                            deviceId: cameras[2].deviceId
+                        }
+                    };
+
+                    const stream1 = await navigator.mediaDevices.getUserMedia(constraints1);
+                    const stream2 = await navigator.mediaDevices.getUserMedia(constraints2);
+                    const stream3 = await navigator.mediaDevices.getUserMedia(constraints3);
+
+                    const video1 = document.getElementById('video1');
+                    const video2 = document.getElementById('video2');
+                    const video3 = document.getElementById('video3');
+
+                    video1.srcObject = stream1;
+                    video2.srcObject = stream2;
+                    video3.srcObject = stream3;
+                } else {
+                    console.error('No se encontraron suficientes cámaras conectadas.');
+                }
+            } catch (error) {
+                console.error('Error al acceder a las cámaras:', error);
+            }
+        }
+
+        startStream();
+    </script>
+</body>
+</html>

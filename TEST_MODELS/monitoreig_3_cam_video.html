@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clasificación de múltiples cámaras</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .video-container {
+            width: 30%;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        video {
+            width: 100%;
+            height: auto;
+        }
+
+        .label-container {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 8px;
+            box-sizing: border-box;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .probability {
+            margin-bottom: 5px;
+        }
+
+        .green {
+            color: #4CAF50;
+        }
+
+        .red {
+            color: #FF0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <video id="video1" autoplay playsinline></video>
+        <div class="label-container" id="label-container1"></div>
+    </div>
+    <div class="video-container">
+        <video id="video2" autoplay playsinline></video>
+        <div class="label-container" id="label-container2"></div>
+    </div>
+    <div class="video-container">
+        <video id="video3" autoplay playsinline></video>
+        <div class="label-container" id="label-container3"></div>
+    </div>
+    <script>
+        async function startStream() {
+            try {
+                const devices = await navigator.mediaDevices.enumerateDevices();
+                const cameras = devices.filter(device => device.kind === 'videoinput'&& device.label.includes('USB'));
+
+                if (cameras.length >= 3) {
+                    for (let i = 0; i < 3; i++) {
+                        const constraints = {
+                            video: {
+                                deviceId: cameras[i].deviceId
+                            }
+                        };
+                        const stream = await navigator.mediaDevices.getUserMedia(constraints);
+                        const video = document.getElementById(`video${i + 1}`);
+                        video.srcObject = stream;
+                        classifyVideo(video, `label-container${i + 1}`);
+                    }
+                } else {
+                    console.error('No se encontraron suficientes cámaras conectadas.');
+                }
+            } catch (error) {
+                console.error('Error al acceder a las cámaras:', error);
+            }
+        }
+
+        async function classifyVideo(video, labelContainerId) {
+            const modelURL = "./my_model/model.tflite";
+            const metadataURL = "./my_model/labels.txt";
+            const model = await tmImage.load(modelURL, metadataURL);
+            const maxPredictions = model.getTotalClasses();
+            const labelContainer = document.getElementById(labelContainerId);
+
+            setInterval(async () => {
+                const prediction = await model.predict(video);
+                labelContainer.innerHTML = ''; // Limpiar el contenedor antes de actualizar
+
+                // Encontrar la probabilidad máxima
+                let maxProbability = 0;
+                for (let i = 0; i < maxPredictions; i++) {
+                    if (prediction[i].probability > maxProbability) {
+                        maxProbability = prediction[i].probability;
+                    }
+                }
+
+                // Mostrar las probabilidades
+                for (let i = 0; i < maxPredictions; i++) {
+                    const probabilityElement = document.createElement('div');
+                    probabilityElement.textContent = `${prediction[i].className}: ${(prediction[i].probability * 100).toFixed(2)}%`;
+                    if (prediction[i].probability === maxProbability) {
+                        probabilityElement.classList.add('probability', 'green');
+                    } else {
+                        probabilityElement.classList.add('probability', 'red');
+                    }
+                    labelContainer.appendChild(probabilityElement);
+                }
+            }, 1000); // Ajusta este intervalo según tus necesidades
+        }
+
+        startStream();
+    </script>
+</body>
+</html>
